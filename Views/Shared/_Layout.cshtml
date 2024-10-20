@@ -1,20 +1,74 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Student_Mark_Calculator</title>
+    <title>@ViewData["Title"] - Markify</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Student_Mark_Calculator.styles.css" asp-append-version="true" />
+    <style>
+        /* Side menu styling */
+        .side-menu {
+            height: 100%; /* Full height */
+            width: 0; /* Initially hidden */
+            position: fixed; /* Fixed position */
+            z-index: 1; /* Stay on top */
+            top: 0;
+            left: 0;
+            background-color: #004466; /* Side menu background color */
+            overflow-x: hidden; /* Disable horizontal scroll */
+            transition: 0.5s; /* Smooth transition */
+            padding-top: 60px; /* Place content 60px from the top */
+        }
+
+            /* Side menu links */
+            .side-menu a {
+                padding: 8px 8px 8px 32px;
+                text-decoration: none;
+                font-size: 1.5rem;
+                color: #f1f1f1;
+                display: block;
+                transition: 0.3s;
+            }
+
+                /* Change color on hover */
+                .side-menu a:hover {
+                    color: #f8f9fa;
+                }
+
+            /* Button to close the side menu */
+            .side-menu .close-btn {
+                position: absolute;
+                top: 0;
+                right: 25px;
+                font-size: 36px;
+                margin-left: 50px;
+            }
+
+        /* Styling for the menu button (hamburger) */
+        .menu-btn {
+            font-size: 30px;
+            cursor: pointer;
+            background-color: transparent;
+            border: none;
+            color: #004466;
+        }
+
+            .menu-btn:hover {
+                color: #007bff;
+            }
+    </style>
 </head>
+
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Student_Mark_Calculator</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                <!-- Menu button (hamburger) -->
+                <button class="menu-btn" onclick="openMenu()">&#9776;</button>
+                <a class="navbar-brand ms-3" asp-area="" asp-controller="Home" asp-action="Index">GradeTrack</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
@@ -30,6 +84,16 @@
             </div>
         </nav>
     </header>
+
+    <!-- Side menu -->
+    <div id="sideMenu" class="side-menu">
+        <a href="javascript:void(0)" class="close-btn" onclick="closeMenu()">&times;</a>
+        <a href="#">Home</a>
+        <a href="#">Login</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+    </div>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -41,9 +105,23 @@
             &copy; 2024 - Student_Mark_Calculator - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <!-- JavaScript to handle side menu -->
+    <script>
+        function openMenu() {
+            document.getElementById("sideMenu").style.width = "250px"; // Set the width of the menu to 250px
+        }
+
+        function closeMenu() {
+            document.getElementById("sideMenu").style.width = "0"; // Set the width back to 0 to hide the menu
+        }
+    </script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+
 </html>
